@@ -1,0 +1,64 @@
+2020-10-18 17:45:07.466  INFO 1760 --- [restartedMain] com.fxr.myblog.MyblogApplication         : Starting MyblogApplication on FXR-DESKTOP-54BJKDF with PID 1760 (E:\文档\idea_project\myblog\target\classes started by test in E:\文档\idea_project\myblog)
+2020-10-18 17:45:07.482 DEBUG 1760 --- [restartedMain] com.fxr.myblog.MyblogApplication         : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2020-10-18 17:45:07.482  INFO 1760 --- [restartedMain] com.fxr.myblog.MyblogApplication         : The following profiles are active: dev
+2020-10-18 17:45:07.560  INFO 1760 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-10-18 17:45:07.560  INFO 1760 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-10-18 17:45:08.888  INFO 1760 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-10-18 17:45:08.982  INFO 1760 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 98ms. Found 4 JPA repository interfaces.
+2020-10-18 17:45:10.060  INFO 1760 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-10-18 17:45:10.076  INFO 1760 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-10-18 17:45:10.076  INFO 1760 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2020-10-18 17:45:10.185  INFO 1760 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-10-18 17:45:10.185  INFO 1760 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2625 ms
+2020-10-18 17:45:10.529  INFO 1760 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-10-18 17:45:10.591  INFO 1760 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-10-18 17:45:10.638  INFO 1760 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2020-10-18 17:45:10.763  WARN 1760 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-10-18 17:45:10.794  INFO 1760 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-10-18 17:45:10.966  INFO 1760 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-10-18 17:45:11.419  INFO 1760 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-10-18 17:45:11.857  INFO 1760 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-10-18 17:45:11.872  INFO 1760 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2020-10-18 17:45:12.029  INFO 1760 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-10-18 17:45:12.107  INFO 1760 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-10-18 17:45:12.107  INFO 1760 --- [restartedMain] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-10-18 17:45:13.029  INFO 1760 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-10-18 17:45:13.044  INFO 1760 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-10-18 17:45:13.544  INFO 1760 --- [restartedMain] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-10-18 17:45:13.560  INFO 1760 --- [restartedMain] com.fxr.myblog.MyblogApplication         : Started MyblogApplication in 7.521 seconds (JVM running for 13.527)
+2020-10-18 17:45:25.414  INFO 1760 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-10-18 17:45:25.414  INFO 1760 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-10-18 17:45:25.430  INFO 1760 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 15 ms
+2020-10-18 17:45:25.496  INFO 1760 --- [http-nio-8080-exec-1] com.fxr.myblog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8080/', ip='127.0.0.1', classMethod='com.fxr.myblog.web.IndexController.index', args=[]}
+2020-10-18 17:45:25.504  INFO 1760 --- [http-nio-8080-exec-1] com.fxr.myblog.aspect.LogAspect          : Result : index
+2020-10-18 17:53:19.376  INFO 10316 --- [restartedMain] com.fxr.myblog.MyblogApplication         : Starting MyblogApplication on FXR-DESKTOP-54BJKDF with PID 10316 (E:\文档\idea_project\myblog\target\classes started by test in E:\文档\idea_project\myblog)
+2020-10-18 17:53:19.389 DEBUG 10316 --- [restartedMain] com.fxr.myblog.MyblogApplication         : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2020-10-18 17:53:19.390  INFO 10316 --- [restartedMain] com.fxr.myblog.MyblogApplication         : The following profiles are active: dev
+2020-10-18 17:53:19.472  INFO 10316 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-10-18 17:53:19.472  INFO 10316 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-10-18 17:53:20.257  INFO 10316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-10-18 17:53:20.345  INFO 10316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79ms. Found 4 JPA repository interfaces.
+2020-10-18 17:53:21.277  INFO 10316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-10-18 17:53:21.293  INFO 10316 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-10-18 17:53:21.293  INFO 10316 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2020-10-18 17:53:21.434  INFO 10316 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-10-18 17:53:21.434  INFO 10316 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1962 ms
+2020-10-18 17:53:21.748  INFO 10316 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-10-18 17:53:21.807  INFO 10316 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-10-18 17:53:21.867  INFO 10316 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2020-10-18 17:53:21.987  WARN 10316 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-10-18 17:53:22.016  INFO 10316 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-10-18 17:53:22.123  INFO 10316 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-10-18 17:53:22.410  INFO 10316 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-10-18 17:53:22.669  INFO 10316 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-10-18 17:53:22.694  INFO 10316 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2020-10-18 17:53:23.026  INFO 10316 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-10-18 17:53:23.079  INFO 10316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-10-18 17:53:23.082  INFO 10316 --- [restartedMain] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-10-18 17:53:23.257  INFO 10316 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-10-18 17:53:23.257  INFO 10316 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-10-18 17:53:23.276  INFO 10316 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 19 ms
+2020-10-18 17:53:23.719  INFO 10316 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-10-18 17:53:23.727  INFO 10316 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-10-18 17:53:24.475  INFO 10316 --- [restartedMain] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-10-18 17:53:24.487  INFO 10316 --- [restartedMain] com.fxr.myblog.MyblogApplication         : Started MyblogApplication in 5.856 seconds (JVM running for 7.091)

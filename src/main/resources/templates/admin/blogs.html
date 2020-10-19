@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理博客</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+
+<!--导航-->
+<nav th:replace="admin/_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui touming container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item">博客后台管理</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>管理</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img class="ui avatar image" src="../../static/images/touxiang.jpg">
+                        FXR
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">退出账号</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--二级导航栏-->
+<div class="ui attached pointing menu">
+    <div class="ui touming container">
+        <div class="right menu">
+            <a href="#" th:href="@{/admin/blogs/input}" class="item">发布</a>
+            <a href="#" th:href="@{/admin/blogs}" class="teal active item">列表</a>
+        </div>
+    </div>
+</div>
+
+<!--中间部分-->
+<div class=" m-container-small m-padded-tb-big">
+    <div class="ui touming container">
+
+        <!--搜索部分-->
+        <div class="ui secondary segment form">
+            <input type="hidden" name="page">
+            <div class="inline fields">
+                <div class="field">
+                    <input type="text" name="title" placeholder="标题">
+                </div>
+                <div class="field">
+                    <div class="ui labeled action input">
+                        <div class="ui type selection dropdown">
+                            <input type="hidden" name="typeId">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">分类</div>
+                            <div class="menu">
+                                <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}">我的故事</div>
+                            </div>
+                        </div>
+                        <button id="clear-btn" class="ui compact button">Clear</button>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" id="recommend" name="recommend">
+                        <label for="recommend">推荐</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <button th:id="search-btn" type="button" class="ui mini teal button"><i class="search icon"></i>搜索</button>
+                </div>
+            </div>
+        </div>
+
+        <!--列表部分-->
+        <div id="table-container">
+            <table th:fragment="blogList" class="ui compact teal table">
+
+                <!--表头-->
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>标题</th>
+                    <th>类型</th>
+                    <th>推荐</th>
+                    <th>状态</th>
+                    <th>更新时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+
+                <!--表格-->
+                <tbody>
+                <tr th:each="blog,iterStat : ${page.content}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${blog.title}">刻意练习清单</td>
+                    <td th:text="${blog.type.name}">认知升级</td>
+                    <td th:text="${blog.recommend} ? '是' : '否'">是</td>
+                    <td th:text="${blog.published} ? '发布' : '草稿'">发布</td>
+                    <td th:text="${blog.updateTime}">2018-09-28 09:11</td>
+                    <td>
+                        <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal basic button">编辑</a>
+                        <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini red basic button">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+
+                <!--功能操作-->
+                <tfoot>
+                <tr>
+                    <th colspan="7">
+                        <div class="ui mini pagination menu" th:if="${page.totalPages > 1}">
+                            <a onclick="page(this)" th:attr="data-page=${page.number} - 1" class="item" th:unless="${page.first}">上一页</a>
+                            <a onclick="page(this)" th:attr="data-page=${page.number} + 1" class="item" th:unless="${page.last}">下一页</a>
+                        </div>
+                        <a href="#" th:href="@{/admin/blogs/input}" class="ui right floated teal basic button">新增</a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+
+            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                <i class="close icon"></i>
+                <div class="header">提示：</div>
+                <p th:text="${message}">恭喜，操作成功！</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--底部-->
+<footer th:replace="admin/_fragments :: footer" class="ui touming inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="four wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../../static/images/wechat.jpg" class="ui rounded image" alt="" style="width:110px">
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-spaced m-opacity-mini">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">用户故事（User Story）</a>
+                    <a href="#" class="item">失败要趁早</a>
+                    <a href="#" class="item">学习清单</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-spaced m-opacity-mini">联系方式</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email：2816077466@qq.com</a>
+                    <a href="#" class="item">VX：fxr2816077466</a>
+                    <a href="#" class="item">QQ：2816077466</a>
+                </div>
+            </div>
+            <div class="six wide column">
+                <h4 class="ui inverted header m-text-spaced m-opacity-mini">FXR</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的首个个人博客，我会在这上面分享关于学习编程、写作思考等相关的内容，希望可以给大家带来一些启发和帮助...</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">On June 24, 2020, FXR's first personal blog officially started writing</p>
+    </div>
+</footer>
+
+<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
+<script th:inline="javascript">
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on :'hover'
+    });
+
+    //消息提示关闭初始化
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+
+    function page(obj) {
+        $("[name='page']").val($(obj).data("page"));
+        loadData();
+    }
+
+    $("#search-btn").click(function () {
+        $("[name='page']").val(0);
+        loadData();
+    });
+
+    $('#clear-btn')
+        .on('click', function() {
+            $('.ui.type.dropdown')
+                .dropdown('clear');
+        });
+
+    function loadData() {
+
+        $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search",{
+            title : $("[name='title']").val(),
+            typeId : $("[name='typeId']").val(),
+            recommend : $("[name='recommend']").prop('checked'),
+            page : $("[name='page']").val()
+        });
+        console.log("这是控制台输出语句.");
+
+    //     //需要发送的数据
+    //     let modelJson={
+    //         title : $("[name='title']").val(),
+    //         typeId : $("[name='typeId']").val(),
+    //         recommend : $("[name='recommend']").prop('checked'),
+    //         page : $("[name='page']").val()
+    //     }
+    //
+    //     $.ajax({
+    //         url: "/admin/blogs/search",
+    //
+    //         type: 'post',
+    //
+    //         //contentType: 'application/json',
+    //         //没规定就是默认的application/x-www-form-urlencoded; charset=UTF-8
+    //         //格式的问题真的是头大，如果大家出现前端明显送出了数据但是后端取出为null 的时候，肯定是格式问题了，建议都用默认格式好了
+    //
+    //         data:modelJson,  //要发的数据，如果出现格式问题则 JSON.stringify(modelJson)
+    //
+    //         //设成同步请求，不加默认是异步，这里加这个是为了同步适用下面的那条语句，
+    //         //不然异步的话，$("#table-container")会用不了
+    //         async: false,
+    //
+    //         success: function(data){
+    //             if(data != null){
+    //                 $("#table-container").html(data);
+    //             }
+    //         }
+    //     });
+
+    }
+
+
+</script>
+</body>
+</html>

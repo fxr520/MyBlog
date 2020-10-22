@@ -228,14 +228,13 @@
         });
 
     function loadData() {
-
+        console.log("这是控制台输出语句.");
         $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search",{
             title : $("[name='title']").val(),
             typeId : $("[name='typeId']").val(),
             recommend : $("[name='recommend']").prop('checked'),
             page : $("[name='page']").val()
         });
-        console.log("这是控制台输出语句.");
 
     //     //需要发送的数据
     //     let modelJson={

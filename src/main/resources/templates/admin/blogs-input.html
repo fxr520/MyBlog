@@ -116,6 +116,10 @@
                 </div>
             </div>
 
+            <div class="required field">
+                <textarea name="description" th:text="*{description}" placeholder="博客描述..." maxlength="300"></textarea>
+            </div>
+
             <div class="inline fields">
                 <div class="field">
                     <div class="ui inverted checkbox">
@@ -256,7 +260,7 @@
                 }]
             },
             typeId: {
-                identifier: 'typeId',
+                identifier: 'type.id',
                 rules: [{
                     type   : 'empty',
                     prompt : '类别不可不选，请选择一个分类'
@@ -269,6 +273,13 @@
                     prompt : '首图地址不可为空，请输入首图地址'
                 }]
             },
+            description: {
+                identifier: 'description',
+                rules: [{
+                    type   : 'empty',
+                    prompt : '博客描述不可为空，请输入博客描述'
+                }]
+            }
         }
     });
 

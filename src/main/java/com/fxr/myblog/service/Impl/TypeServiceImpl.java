@@ -1,12 +1,15 @@
 package com.fxr.myblog.service.Impl;
 
+import com.fxr.myblog.NotFoundException;
 import com.fxr.myblog.dao.TypeDao;
 import com.fxr.myblog.po.Type;
 import com.fxr.myblog.service.TypeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -51,17 +54,22 @@ public class TypeServiceImpl implements TypeService {
         return typeDao.findAll();
     }
 
+    @Override
+    public List<Type> listTypeTop(Integer size) {
+        Sort sort = new Sort(Sort.Direction.DESC,"blogs.size");
+        Pageable pageable = new PageRequest(0,size,sort);
+        return typeDao.findTypeTop(pageable);
+    }
+
     @Transactional
     @Override
     public Type updateType(Long id, Type type) {
-        BeanUtils.copyProperties(type, typeDao.getOne(id));
-        return typeDao.save(typeDao.getOne(id));
-//        if (t != null) {
-//            BeanUtils.copyProperties(type, t);
-//            return typeDao.save(t);
-//        } else {
-//            throw new NotFoundException("不存在该类型");
-//        }
+        Type t = typeDao.getOne(id);
+        if (t == null) {
+            throw new NotFoundException("不存在该类型");
+        }
+        BeanUtils.copyProperties(type,t);
+        return typeDao.save(t);
     }
 
     @Transactional

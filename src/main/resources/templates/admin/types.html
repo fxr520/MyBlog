@@ -50,14 +50,9 @@
 <div class=" m-container-small m-padded-tb-big">
     <div class="ui touming container">
 
-        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
-            <i class="close icon"></i>
-            <div class="header">提示：</div>
-            <p th:text="${message}">恭喜，操作成功！</p>
-        </div>
 
         <!--列表部分-->
-        <table class="ui celled table">
+        <table class="ui compact teal table">
             <!--表头-->
             <thead>
                 <tr>
@@ -93,6 +88,14 @@
                  </tr>
             </tfoot>
         </table>
+
+
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <i class="close icon"></i>
+            <div class="header">提示：</div>
+            <p th:text="${message}">恭喜，操作成功！</p>
+        </div>
+
     </div>
 </div>
 

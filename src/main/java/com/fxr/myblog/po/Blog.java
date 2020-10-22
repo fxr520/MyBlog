@@ -98,6 +98,11 @@ public class Blog {
     @Transient  //该注解会将下面的字段不写进数据库中,只做为一个属性值
     private String tagIds;
 
+    /**
+     * 博客描述
+     */
+    private String description;
+
     public Blog() {
     }
 
@@ -245,6 +250,13 @@ public class Blog {
         this.tagIds = tagIds;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 
     public void init() {
@@ -289,6 +301,8 @@ public class Blog {
                 ", tags=" + tags +
                 ", user=" + user +
                 ", comments=" + comments +
+                ", tagIds='" + tagIds + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

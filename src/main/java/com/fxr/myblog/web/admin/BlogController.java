@@ -42,7 +42,7 @@ public class BlogController {
     private TagService tagService;
 
     @GetMapping("/blogs")
-    public String blogs(@PageableDefault(size = 5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String blogs(@PageableDefault(size = 8, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                         BlogQuery blog, Model model) {
         model.addAttribute("types",typeService.listType());
         model.addAttribute("page",blogService.listBlog(pageable, blog));
@@ -50,9 +50,8 @@ public class BlogController {
     }
 
     @PostMapping("/blogs/search")
-    public String search(@PageableDefault(size = 5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String search(@PageableDefault(size = 8, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          BlogQuery blog, Model model) {
-        System.out.println("==========进入该接口进行数据操作===========");
         model.addAttribute("page",blogService.listBlog(pageable, blog));
         return "admin/blogs  :: blogList";
     }
@@ -85,7 +84,13 @@ public class BlogController {
         blog.setType(typeService.getType(blog.getType().getId()));
         blog.setTags(tagService.listTag(blog.getTagIds()));
 
-        Blog b = blogService.saveBlog(blog);
+        Blog b;
+        if (blog.getId() == null) {
+            b =  blogService.saveBlog(blog);
+        } else {
+            b = blogService.updateBlog(blog.getId(), blog);
+        }
+
         if ( b == null) {
             redirectAttributes.addFlashAttribute("message","操作失败！");
         } else {

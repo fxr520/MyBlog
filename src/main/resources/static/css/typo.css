@@ -7,6 +7,11 @@
 	text-align: justify;//两端对齐
 }
 
+typo li {
+  font-weight: 500;
+  padding: 10px 0;
+}
+
 /* 要注意表单元素并不继承父级 font 的问题 */
 .typo button,.typo input,.typo select,.typo textarea {
   font: 300 1em/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
@@ -258,7 +263,7 @@
 
 .typo ol, .typo-ol {
   list-style: decimal;
-  margin-left: 1.9em;
+  line-height:30px;
 }
 
 .typo li ul, .typo li ol, .typo-ul ul, .typo-ul ol, .typo-ol ul, .typo-ol ol {

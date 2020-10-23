@@ -25,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> listCommentByBlogId(Long blogId) {
-        Sort sort = new Sort("createTime");
+        Sort sort = Sort.by(Sort.Direction.DESC,"createTime");
         List<Comment> comments = commentDao.findByBlogIdAndParentCommentNull(blogId,sort);
         return eachComment(comments);
     }
@@ -83,6 +83,7 @@ public class CommentServiceImpl implements CommentService {
 
     //存放迭代找出的所有子代的集合
     private List<Comment> tempReplys = new ArrayList<>();
+
     /**
      * 递归迭代，剥洋葱
      * @param comment 被迭代的对象

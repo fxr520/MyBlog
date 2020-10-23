@@ -60,6 +60,7 @@
             <div class="ui attached segment">
                 <img src="../static/images/buzhihuo.jpg" th:src="@{${blog.firstPicture}}" alt="" class="ui rounded fluid image">
             </div>
+
             <!--内容-->
             <div class="ui attached padded segment">
 
@@ -147,8 +148,9 @@
                                             </a>
                                             <div class="content">
                                                 <a class="author">
-                                                    <span th:text="${reply.nickName}">小红</span>
-                                                    <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${reply.adminComment}">博主</div>
+                                                    <span th:text="${reply.nickName}">小红</span><div class="ui mini basic teal left pointing label m-padded-mini" th:if="${reply.adminComment}">博主</div>
+
+                                                    &nbsp;<span th:text="|@ ${reply.parentComment.nickName}|" class="m-teal">@ 小白</span>
                                                 </a>
                                                 <div class="metadata">
                                                     <span class="date" th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">Yesterday at 12:30AM</span>
@@ -157,7 +159,7 @@
                                                     <p>This has been very useful for my research. Thanks as well!</p>
                                                 </div>
                                                 <div class="actions">
-                                                    <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickName}" onclick="reply(this)">回复</a>
+                                                    <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickName}" onclick="reply(this)">回复</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -266,7 +268,7 @@
     <script src="../static/lib/waypoints/jquery.waypoints.min.js"></script>
     <!--/*/</th:block>/*/-->
 
-    <script th:inlne = "javascript">
+    <script th:inline="javascript">
         $('.menu.toggle').click(function () {
             $('.m-item').toggleClass('m-mobile-hide');
         });
@@ -351,6 +353,7 @@
         });
 
         $(function () {
+            console.log("这是监测动态加载页面的评论方法是否执行,出现该语句说明已经进入该方法");
             $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"comments/1");
         });
 
@@ -364,45 +367,60 @@
             }
         });
 
-
         function postData() {
             console.log("这是监测postData方法是否执行,出现该语句说明已经进入该方法");
-
-            let modelJson={
+            $("#comment-container").load(/*[[@{/comments}]]*/"",{
                 "parentComment.id" : $("[name='parentComment.id']").val(),
                 "blog.id" : $("[name='blog.id']").val(),
                 "nickName": $("[name='nickName']").val(),
                 "email"   : $("[name='email']").val(),
                 "content" : $("[name='content']").val()
-            }
-            $.ajax({
-                url: "/comments",
-
-                type: 'post',
-
-                //contentType: 'application/json',
-                //没规定就是默认的application/x-www-form-urlencoded; charset=UTF-8
-                //格式的问题真的是头大，如果大家出现前端明显送出了数据但是后端取出为null 的时候，肯定是格式问题了，建议都用默认格式好了
-
-                data:modelJson,  //要发的数据，如果出现格式问题则 JSON.stringify(modelJson)
-
-                //设成同步请求，不加默认是异步，这里加这个是为了同步适用下面的那条语句，
-                //不然异步的话，$("#comment-container")会用不了
-                async: false,
-
-                success: function(data){
-                    if(data != null){
-                        $("#comment-container").html(data);
-                    }
-                }
             },function (responseTxt, statusTxt, xhr) {
-                console.log("这是监测清空回复信息的方法是否执行,出现该语句说明已经进入该方法");
+       $(window).scrollTo($('#comment-container'),500);
                 clearContent();
             });
         }
+        // 相同作用
+        // function postData() {
+        //     console.log("这是监测postData方法是否执行,出现该语句说明已经进入该方法");
+        //
+        //     let modelJson={
+        //         "parentComment.id" : $("[name='parentComment.id']").val(),
+        //         "blog.id" : $("[name='blog.id']").val(),
+        //         "nickName": $("[name='nickName']").val(),
+        //         "email"   : $("[name='email']").val(),
+        //         "content" : $("[name='content']").val()
+        //     }
+        //     $.ajax({
+        //         url: "/comments",
+        //
+        //         type: 'post',
+        //
+        //         //contentType: 'application/json',
+        //         //没规定就是默认的application/x-www-form-urlencoded; charset=UTF-8
+        //         //格式的问题真的是头大，如果大家出现前端明显送出了数据但是后端取出为null 的时候，肯定是格式问题了，建议都用默认格式好了
+        //
+        //         data:modelJson,  //要发的数据，如果出现格式问题则 JSON.stringify(modelJson)
+        //
+        //         //设成同步请求，不加默认是异步，这里加这个是为了同步适用下面的那条语句，
+        //         //不然异步的话，$("#comment-container")会用不了
+        //         async: false,
+        //
+        //         success: function(data){
+        //             if(data != null){
+        //                 $("#comment-container").html(data);
+        //             }
+        //         }
+        //     },function (responseTxt, statusTxt, xhr) {
+        //         console.log("这是监测清空回复信息的方法是否执行,出现该语句说明已经进入该方法");
+        //         clearContent();
+        //     });
+        // }
 
 
         function clearContent() {
+            console.log("这是监测clearContent方法是否执行,出现该语句说明已经进入该方法");
+
             $("[name='content']").val('');
             $("[name='parentComment.id']").val(-1);
             $("[name='content']").attr("placeholder", "请输入评论信息...");

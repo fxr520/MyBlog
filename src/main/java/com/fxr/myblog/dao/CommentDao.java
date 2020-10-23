@@ -10,7 +10,7 @@ import java.util.List;
  * @author fanXiaoRui
  * @date 2020/10/22 13:33
  */
-public interface CommentDao extends JpaRepository<Comment,Long> {
+public interface CommentDao extends JpaRepository<Comment, Long> {
 
 
     List<Comment> findByBlogIdAndParentCommentNull(Long blogId, Sort sort);

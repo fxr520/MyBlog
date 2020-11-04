@@ -18,4 +18,4 @@ logging:
     name: log/myblog-pro.log
 
 server:
-  port: 8081
+  port: 3010

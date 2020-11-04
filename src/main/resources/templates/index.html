@@ -335,13 +335,13 @@
                                     <i class="idea icon"></i>分类
                                 </div>
                                 <div class="right aligned column">
-                                    <a href="#" th:href="@{types/-1}" target="_blank">more <i class="angle double right icon"></i></a>
+                                    <a href="#" th:href="@{type/-1}" target="_blank">more <i class="angle double right icon"></i></a>
                                 </div>
                             </div>
                         </div>
                         <div class="ui segment">
                             <div class="ui fluid vertical menu">
-                                <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${types}">
+                                <a href="#" th:href="@{/type/{id}(id=${type.id})}" target="_blank" class="item" th:each="type : ${types}">
                                     <span th:text="${type.name}">学习日志</span>
                                     <div class="ui teal basic left pointing label" th:text="${#arrays.length(type.blogs)}">520</div>
                                 </a>
@@ -375,12 +375,12 @@
                                     <i class="tags icon"></i>标签
                                 </div>
                                 <div class="right aligned column">
-                                    <a href="#" th:href="@{tags/-1}" target="_blank">more<i class="angle double right icon"></i></a>
+                                    <a href="#" th:href="@{tag/-1}" target="_blank">more<i class="angle double right icon"></i></a>
                                 </div>
                             </div>
                         </div>
                         <div class="ui segment">
-                            <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny" th:each="tag : ${tags}">
+                            <a href="#" th:href="@{/tag/{id}(id=${tag.id})}" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny" th:each="tag : ${tags}">
                                 <span th:text="${tag.name}">方法论</span>
                                 <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
                             </a>

@@ -3,7 +3,9 @@ spring:
     cache: false
 
   profiles:
-    active: dev
+    active: pro
 
+  messages:
+    basename: i18n/messages
 
 comment.avatar: /images/avatar.png

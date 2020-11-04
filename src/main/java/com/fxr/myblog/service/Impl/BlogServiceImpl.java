@@ -18,15 +18,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author fanXiaoRui
@@ -86,6 +81,17 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public Page<Blog> listBlog(Long tagId, Pageable pageable) {
+        return blogDao.findAll(new Specification<Blog>() {
+            @Override
+            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+                Join join = root.join("tags");
+                return cb.equal(join.get("id"),tagId);
+            }
+        },pageable);
+    }
+
+    @Override
     public Page<Blog> listBlog(String query, Pageable pageable) {
         return blogDao.findByQuery(query, pageable);
     }
@@ -93,8 +99,23 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<Blog> listRecommendBlogTop(Integer size) {
         Sort sort = Sort.by(Sort.Direction.DESC,"updateTime");
-        Pageable pageable = new PageRequest(0, size, sort);
+        Pageable pageable = PageRequest.of(0, size, sort);
         return blogDao.findRecommendBlogTop(pageable);
+    }
+
+    @Override
+    public Map<String, List<Blog>> archiveBlog() {
+        List<String> years = blogDao.findGroupYear();
+        Map<String, List<Blog>> map = new HashMap<>();
+        for (String year : years) {
+            map.put(year, blogDao.findByYear(year));
+        }
+        return map;
+    }
+
+    @Override
+    public Long countBlog() {
+        return blogDao.count();
     }
 
     @Transient
